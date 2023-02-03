@@ -21,7 +21,7 @@ def read_data():
     result_header = ["N", "k", "Init", "Max Temperature", "Steps", "Weak steps", "Max Temp States", "Mean Temp", "Initial States Number"]
     results = pd.DataFrame(columns=result_header)
 
-    paths, files = get_file_paths("data")
+    paths, files = get_file_paths("data/oldformat/modified")
     for path, filename in zip(paths, files):
 
         # critical temperatures loading, loaded vector represents critical temperatures for many initial states
@@ -37,7 +37,14 @@ def read_data():
         # temperature log loading
         if filename.endswith(temp_ending):
             pass
-    tabulate(results)
+    return results
+
+
+def hist(df: pd.DataFrame):
+    print(df.columns)
+    df.filter(items=["N", "k", "Max Temperature"])
+    print(df.head())
+    df.hist(column="'Max Temperature", bins=100)
 
 
 def read_parameters(filename: str):
@@ -62,5 +69,7 @@ def process_crit_results(results_df: pd.DataFrame, df: pd.DataFrame, filename: s
 
 
 if __name__ == "__main__":
-    read_data()
+    df = read_data()
+    # hist(df)
+    print(tabulate(df, headers="keys", tablefmt="psql"))
 
