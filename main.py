@@ -1,5 +1,4 @@
 import pandas as pd
-from tabulate import tabulate
 
 from read_data import read_data
 
@@ -33,5 +32,5 @@ def read_parameters(filename: str):
 
 
 if __name__ == "__main__":
-    read_data("./data/aca-search-result-t5n6k4")
+    read_data("data/od-piotra")
 
